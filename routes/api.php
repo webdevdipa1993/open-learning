@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AcedemicYearController;
-
+use App\Http\Controllers\Api\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +21,4 @@ use App\Http\Controllers\Api\AcedemicYearController;
 // });
 
 Route::apiResource('academic-year', AcedemicYearController::class);
+Route::apiResource('subject', SubjectController::class);

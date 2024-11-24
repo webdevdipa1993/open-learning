@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/academic-year', function () {
     return view('acedemicYear.index');
 })->name('academicYear.index');
+
+Route::get('/subject', function () {
+    return view('subject.index');
+})->name('subject.index');
