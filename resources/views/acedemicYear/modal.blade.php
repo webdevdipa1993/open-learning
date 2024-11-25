@@ -6,9 +6,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="academicYearModalLabel">Add/Edit Academic Year</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" data-target="#academicYearModal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="academicYearForm">
@@ -38,7 +36,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-target="#academicYearModal">Close</button>
                 <button type="submit" class="btn btn-primary saveAcademicYear">Save</button>
             </div>
         </div>

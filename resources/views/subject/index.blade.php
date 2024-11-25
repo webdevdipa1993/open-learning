@@ -20,6 +20,7 @@
                                 <th scope="col">Title</th>
                                 <th scope="col">Code</th>
                                 <th scope="col">Description</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -34,5 +35,6 @@
 </div>
 @endsection
 
+@include('subject.modal')
 @include('subject.script')
 

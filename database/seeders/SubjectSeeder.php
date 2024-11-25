@@ -20,6 +20,7 @@ class SubjectSeeder extends Seeder
                 'title' => 'Subject ' . $i,
                 'code' => 'SUB' . str_pad($i, 3, '0', STR_PAD_LEFT), // Generates code like SUB001, SUB002, etc.
                 'description' => 'This is a description for Subject ' . $i . '.',
+                'status' => $i % 2 == 0 ? 'active' : 'inactive', // Alternate active/inactive status
             ]);
         }
     }
