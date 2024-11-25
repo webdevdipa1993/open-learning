@@ -20,3 +20,11 @@ Route::get('/academic-year', function () {
 Route::get('/subject', function () {
     return view('subject.index');
 })->name('subject.index');
+
+
+Route::get('/grade', function () {
+    return view('grade.index');
+})->name('grade.index');
+
+
+
