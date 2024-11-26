@@ -35,5 +35,5 @@
 </div>
 @endsection
 
-
+@include('grade.modal')
 @include('grade.script')

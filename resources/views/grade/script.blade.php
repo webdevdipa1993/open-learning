@@ -30,7 +30,75 @@ $(document).ready(function() {
 
     // Initial fetch
     fetchGrades();
+
+        // Show modal for adding a new grade
+    $('.newGrade').click(function() {
+        $('#gradeForm')[0].reset();
+        $('#gradeId').val('');
+        $('#gradeModal').modal('show');
+    });
+
+     // Save grade (add/edit)
+     $('.saveGrade').click(function() {
+        let id = $('#gradeId').val();
+        let url = id ? `/api/grade/${id}` : '/api/grade';
+        let method = id ? 'PUT' : 'POST';
+        let status = $('#statusToggle').is(':checked') ? 'active' : 'inactive';
+
+        $.ajax({
+            url: url,
+            method: method,
+            data: {
+                title: $('#title').val(),
+                code: $('#code').val(),
+                type: $('#type').val(),
+                status: status,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function() {
+                $('#gradeModal').modal('hide');
+                fetchGrades();
+            }
+        });
+    });
+
+
+    // Edit grade
+    $(document).on('click', '.editGrade', function() {
+        let id = $(this).data('id');
+        $.ajax({
+            url: `/api/grade/${id}`,
+            method: 'GET',
+            success: function(data) {
+                $('#gradeId').val(data.id);
+                $('#title').val(data.title);
+                $('#code').val(data.code);
+                $(`input[name="type"][value="${data.type}"]`).prop('checked', true);
+
+                // Set the status toggle based on the fetched data
+                if (data.status === 'active') {
+                    $('#statusToggle').prop('checked', true);
+                } else {
+                    $('#statusToggle').prop('checked', false);
+                }
+                $('#gradeModal').modal('show');
+            }
+        });
+    });
+
+    // Delete grade
+    $(document).on('click', '.deleteGrade', function() {
+        let id = $(this).data('id');
+        $.ajax({
+            url: `/api/grade/${id}`,
+            method: 'DELETE',
+            success: function(data) {
+                fetchGrades();
+            }
+        });
+    });
  
+
 });
 </script>
 @endsection

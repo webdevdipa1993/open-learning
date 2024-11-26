@@ -22,7 +22,15 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:250',
+            'code' => 'required|string|max:100',
+            'type' => 'required|string|in:stream,semester,class,section,department', // Restrict type to specific values
+            'status' => 'required|in:active,inactive',
+        ]);
+    
+        $record = Grade::create($validated);
+        return response()->json($record, 201); // 201 Created
     }
 
     /**
@@ -30,7 +38,8 @@ class GradeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $record = Grade::findOrFail($id);
+        return response()->json($record, 200);
     }
 
     /**
@@ -38,7 +47,16 @@ class GradeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:250',
+            'code' => 'required|string|max:100',
+            'type' => 'required|string|in:stream,semester,class,section,department', // Restrict type to specific values
+            'status' => 'required|in:active,inactive',
+        ]);
+        $record = Grade::findOrFail($id);
+        $record->update($validated);
+        
+        return response()->json($record, 200);
     }
 
     /**
@@ -46,6 +64,10 @@ class GradeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $record = Grade::findOrFail($id);
+        $record->delete();
+
+        return response()->json(null, 204); // 204 No Content //
     }
+
 }
