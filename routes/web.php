@@ -26,5 +26,8 @@ Route::get('/grade', function () {
     return view('grade.index');
 })->name('grade.index');
 
+Route::get('/teacher', function () {
+    return view('teacher.index');
+})->name('teacher.index');
 
 
