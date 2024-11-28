@@ -36,5 +36,5 @@
 </div>
 @endsection
 
-
+@include('teacher.modal')
 @include('teacher.script')

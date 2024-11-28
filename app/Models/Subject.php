@@ -12,5 +12,5 @@ class Subject extends Model
     // Specify the table name
     protected $table = 'subjects';
 
-    protected $fillable = ['title', 'code', 'description'];
+    protected $fillable = ['title', 'code', 'description', 'status'];
 }

@@ -12,5 +12,5 @@ class Teacher extends Model
     // Specify the table name
     protected $table = 'teachers';
 
-    protected $fillable = ['first_name', 'last_name', 'employee_code','specialization'];
+    protected $fillable = ['first_name', 'last_name', 'employee_code', 'specialization', 'status'];
 }
