@@ -30,4 +30,7 @@ Route::get('/teacher', function () {
     return view('teacher.index');
 })->name('teacher.index');
 
+Route::get('/student', function () {
+    return view('student.index');
+})->name('student.index');
 

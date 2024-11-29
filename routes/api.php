@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AcedemicYearController;
 use App\Http\Controllers\Api\SubjectController;
 use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\StudentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,3 +26,4 @@ Route::apiResource('academic-year', AcedemicYearController::class);
 Route::apiResource('subject', SubjectController::class);
 Route::apiResource('grade', GradeController::class);
 Route::apiResource('teacher', TeacherController::class);
+Route::apiResource('student', StudentController::class);
