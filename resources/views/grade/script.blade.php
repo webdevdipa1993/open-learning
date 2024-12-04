@@ -11,12 +11,19 @@ $(document).ready(function() {
                 console.log(data);
                 let rows = '';
                 $.each(data, function(index, grade) {
+                    // If `grade.parent` exists, display its title, code, and type.
+                    // Otherwise, set it to an empty string (no parent).
+                    let parentData = (grade.parent) 
+                        ? `${grade.parent.title} [${grade.parent.code}/${grade.parent.type}]` 
+                        : 'Top-Level Grade'; // Default text for top-level grades with no parent.
+
                     rows += `<tr>
                         <th scope="row">${grade.id}</th>
                         <td>${grade.title}</td>
                         <td>${grade.code}</td>
                         <td>${grade.type}</td>
-                        <td>${grade.status}</td>
+                        <td>${grade.status}</td> 
+                        <td>${parentData}</td>                      
                         <td>
                             <button class="btn btn-sm btn-warning editGrade" data-id="${grade.id}">Edit</button>
                             <button class="btn btn-sm btn-danger deleteGrade" data-id="${grade.id}">Delete</button>
