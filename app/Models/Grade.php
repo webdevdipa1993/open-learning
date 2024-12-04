@@ -13,5 +13,17 @@ class Grade extends Model
     protected $table = 'grades';
 
     // Define the fillable fields
-    protected $fillable = ['title', 'code', 'type', 'status'];
+    protected $fillable = ['title', 'code', 'type', 'status', 'parent_id'];
+
+    // Children grades relationship
+    public function children()
+    {
+        return $this->hasMany(Grade::class, 'parent_id');
+    }
+
+    // Parent grade relationship
+    public function parent()
+    {
+        return $this->belongsTo(Grade::class, 'parent_id');
+    }
 }

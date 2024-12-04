@@ -31,19 +31,22 @@ $(document).ready(function() {
     // Initial fetch
     fetchGrades();
 
-        // Show modal for adding a new grade
+    // Show modal for adding a new grade
     $('.newGrade').click(function() {
         $('#gradeForm')[0].reset();
         $('#gradeId').val('');
+        loadParentGrades();
         $('#gradeModal').modal('show');
     });
 
-     // Save grade (add/edit)
-     $('.saveGrade').click(function() {
+    // Save grade (add/edit)
+    $('.saveGrade').click(function() {
         let id = $('#gradeId').val();
         let url = id ? `/api/grade/${id}` : '/api/grade';
         let method = id ? 'PUT' : 'POST';
         let status = $('#statusToggle').is(':checked') ? 'active' : 'inactive';
+        let parent_id = $('#parent_id').val();
+        let type = $('input[name="type"]:checked').val();
 
         $.ajax({
             url: url,
@@ -51,8 +54,9 @@ $(document).ready(function() {
             data: {
                 title: $('#title').val(),
                 code: $('#code').val(),
-                type: $('#type').val(),
+                type: type,
                 status: status,
+                parent_id: parent_id,
                 _token: '{{ csrf_token() }}'
             },
             success: function() {
@@ -81,6 +85,7 @@ $(document).ready(function() {
                 } else {
                     $('#statusToggle').prop('checked', false);
                 }
+                loadParentGrades(data.parent_id);
                 $('#gradeModal').modal('show');
             }
         });
@@ -98,6 +103,52 @@ $(document).ready(function() {
         });
     });
  
+
+    // Fetch grades from API and populate table
+    function loadParentGrades(parentId) {
+        // Load parent grades on page load
+        $.ajax({
+            url: '/api/grades/parents', // Endpoint to fetch parent grades
+            method: 'GET',
+            success: function(data) {
+                // Clear and populate the dropdown
+                $('#parent_id').empty();
+                $('#parent_id').append('<option value="">Choose Parent Grade</option>');
+                data.forEach(function(grade) {
+                    $('#parent_id').append(`<option value="${grade.id}" `((parseInt(parentId) > 0 && grade.id === parentId) ? 'selected = "selected"' : '')`>${grade.title} [${grade.code}/${grade.type}] </option>`);
+                });
+            },
+            error: function() {
+                alert('Failed to load parent grades.');
+            }
+        });
+    }
+    
+    // Fetch grades from API and populate the dropdown
+    function loadParentGrades(parentId) {
+        // Send an AJAX request to fetch parent grades
+        $.ajax({
+            url: '/api/grades/parents', // Endpoint to fetch parent grades
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#parent_id').empty();
+                $('#parent_id').append('<option value="">Choose Parent Grade</option>');
+
+                // Loop through the grades and populate the dropdown
+                data.forEach(function(grade) {
+                    // Check if the grade's ID matches the parentId to mark it as selected
+                    const selected = parseInt(parentId) > 0 && grade.id === parseInt(parentId) ? 'selected="selected"' : '';
+                    $('#parent_id').append(`<option value="${grade.id}" ${selected}>${grade.title} [${grade.code}/${grade.type}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load parent grades.');
+            }
+        });
+    }
+
 
 });
 </script>

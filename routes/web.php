@@ -34,3 +34,6 @@ Route::get('/student', function () {
     return view('student.index');
 })->name('student.index');
 
+Route::get('/curriculum', function () {
+    return view('curriculum.index');
+})->name('curriculum.index');

@@ -25,5 +25,6 @@ use App\Http\Controllers\Api\StudentController;
 Route::apiResource('academic-year', AcedemicYearController::class);
 Route::apiResource('subject', SubjectController::class);
 Route::apiResource('grade', GradeController::class);
+Route::get('grades/parents', [GradeController::class, 'getParentGrades']);
 Route::apiResource('teacher', TeacherController::class);
 Route::apiResource('student', StudentController::class);

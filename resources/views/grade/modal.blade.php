@@ -54,6 +54,13 @@
                             <label class="form-check-label" for="statusToggle">Active/Inactive</label>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="parent_id">Parent Grade</label>
+                        <select class="form-control" id="parent_id" name="parent_id">
+                        </select>
+                    </div>
+
                     
                 </form>
             </div>

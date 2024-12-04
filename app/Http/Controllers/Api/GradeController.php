@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Grade;
+use Illuminate\Validation\Rule;
 
 class GradeController extends Controller
 {
@@ -24,9 +25,14 @@ class GradeController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:250',
-            'code' => 'required|string|max:100',
+            'code' => 'required|string|max:50|unique:grades,code',
             'type' => 'required|string|in:stream,semester,class,section,department', // Restrict type to specific values
             'status' => 'required|in:active,inactive',
+            'parent_id' => [
+                'nullable', // Parent ID is optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
         ]);
     
         $record = Grade::create($validated);
@@ -48,11 +54,21 @@ class GradeController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:250',
-            'code' => 'required|string|max:100',
-            'type' => 'required|string|in:stream,semester,class,section,department', // Restrict type to specific values
-            'status' => 'required|in:active,inactive',
-        ]);
+            'title' => 'required|string|max:250', // Title is required, max length 250
+            'code' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('grades', 'code')->ignore($id), // Ensure unique code, ignore current grade ID on update
+            ],
+            'type' => 'required|string|in:stream,semester,class,section,department', // Type must be one of the specified values
+            'status' => 'required|in:active,inactive', // Status must be active or inactive
+            'parent_id' => [
+                'nullable', // Parent ID is optional
+                'integer', // Parent ID must be an integer
+                Rule::exists('grades', 'id'), // Parent ID must exist in the grades table
+            ],
+        ]);        
         $record = Grade::findOrFail($id);
         $record->update($validated);
         
@@ -70,4 +86,9 @@ class GradeController extends Controller
         return response()->json(null, 204); // 204 No Content //
     }
 
+    public function getParentGrades()
+    {
+        $grades = Grade::select('id', 'title', 'code', 'type')->get();
+        return response()->json($grades);
+    }
 }
