@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\SubjectController;
 use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\CurriculumController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +29,4 @@ Route::apiResource('grade', GradeController::class);
 Route::get('grades/parents', [GradeController::class, 'getParentGrades']);
 Route::apiResource('teacher', TeacherController::class);
 Route::apiResource('student', StudentController::class);
+Route::apiResource('curriculum', CurriculumController::class);
