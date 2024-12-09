@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\AcedemicYear;
+use App\Models\AcademicYear;
 use Carbon\Carbon;
 
 class AcademicYearSeeder extends Seeder
@@ -16,7 +16,7 @@ class AcademicYearSeeder extends Seeder
     {
         // Generate 10 sample records
         for ($i = 1; $i <= 10; $i++) {
-            AcedemicYear::create([
+            AcademicYear::create([
                 'start_date' => Carbon::now()->subYears($i)->startOfYear()->toDateString(),
                 'end_date' => Carbon::now()->subYears($i)->endOfYear()->toDateString(),
                 'title' => 'Academic Year ' . (2024 - $i),

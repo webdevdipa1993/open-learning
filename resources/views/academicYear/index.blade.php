@@ -35,5 +35,5 @@
 </div>
 @endsection
 
-@include('acedemicYear.modal')
-@include('acedemicYear.script')
+@include('academicYear.modal')
+@include('academicYear.script')

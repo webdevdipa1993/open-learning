@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\AcedemicYear;
+use App\Models\AcademicYear;
 
-class AcedemicYearController extends Controller
+class AcademicYearController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $records = AcedemicYear::all();
+        $records = AcademicYear::all();
         return response()->json($records, 200);
     }
 
@@ -29,7 +29,7 @@ class AcedemicYearController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        $record = AcedemicYear::create($validated);
+        $record = AcademicYear::create($validated);
         return response()->json($record, 201); // 201 Created
     }
 
@@ -38,7 +38,7 @@ class AcedemicYearController extends Controller
      */
     public function show(string $id)
     {
-        $record = AcedemicYear::findOrFail($id);
+        $record = AcademicYear::findOrFail($id);
         return response()->json($record, 200);
     }
 
@@ -54,7 +54,7 @@ class AcedemicYearController extends Controller
             'status' => 'required|in:active,inactive', 
         ]);
 
-        $record = AcedemicYear::findOrFail($id);
+        $record = AcademicYear::findOrFail($id);
         $record->update($validated);
 
         return response()->json($record, 200);
@@ -65,7 +65,7 @@ class AcedemicYearController extends Controller
      */
     public function destroy(string $id)
     {
-        $record = AcedemicYear::findOrFail($id);
+        $record = AcademicYear::findOrFail($id);
         $record->delete();
 
         return response()->json(null, 204); // 204 No Content

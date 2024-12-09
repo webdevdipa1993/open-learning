@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AcedemicYearController;
+use App\Http\Controllers\Api\AcademicYearController;
 use App\Http\Controllers\Api\SubjectController;
 use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\TeacherController;
@@ -23,7 +23,7 @@ use App\Http\Controllers\Api\CurriculumController;
 //     return $request->user();
 // });
 
-Route::apiResource('academic-year', AcedemicYearController::class);
+Route::apiResource('academic-year', AcademicYearController::class);
 Route::apiResource('subject', SubjectController::class);
 Route::apiResource('grade', GradeController::class);
 Route::get('grades/parents', [GradeController::class, 'getParentGrades']);
