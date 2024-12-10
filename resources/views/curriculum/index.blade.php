@@ -18,6 +18,7 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Ademic_year_id</th>
+                                <th scope="col">Department_id</th>
                                 <th scope="col">Stream_id</th>
                                 <th scope="col">Semester_id</th>
                                 <th scope="col">Class_id</th>

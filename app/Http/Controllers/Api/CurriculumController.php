@@ -14,7 +14,7 @@ class CurriculumController extends Controller
      */
     public function index()
     {
-        $records = Curriculum::all();
+        $records = Curriculum::with(['academic_year', 'teacher', 'subject'])->get();
         // print_r($records);
         return response()->json($records, 200);
     }
