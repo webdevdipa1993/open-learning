@@ -27,16 +27,46 @@ $(document).ready(function() {
                     // Otherwise, set it to an empty string (no subject).
                     let subjectData = (curriculum.subject) 
                         ? `${curriculum.subject.title}` 
-                        : '-NA-';         
+                        : '-NA-';
+
+                    // If `curriculum.department` exists, display its title, code, and type.
+                    // Otherwise, set it to an empty string (no department).
+                    let departmentData = (curriculum.department) 
+                        ? `${curriculum.department.title}` 
+                        : '-NA-';
+                        
+                    // If `curriculum.stream` exists, display its title, code, and type.
+                    // Otherwise, set it to an empty string (no stream).
+                    let streamData = (curriculum.stream) 
+                        ? `${curriculum.stream.title}` 
+                        : '-NA-';
+                        
+                    // If `curriculum.semester` exists, display its title, code, and type.
+                    // Otherwise, set it to an empty string (no semester).
+                    let semesterData = (curriculum.semester) 
+                        ? `${curriculum.semester.title}` 
+                        : '-NA-';
+                        
+                    // If `curriculum.class` exists, display its title, code, and type.
+                    // Otherwise, set it to an empty string (no class).
+                    let classData = (curriculum.class) 
+                        ? `${curriculum.class.title}` 
+                        : '-NA-';
+                        
+                    // If `curriculum.section` exists, display its title, code, and type.
+                    // Otherwise, set it to an empty string (no section).
+                    let sectionData = (curriculum.section) 
+                        ? `${curriculum.section.title}` 
+                        : '-NA-';    
 
                     rows += `<tr>
                         <th scope="row">${curriculum.id}</th>
                         <td>${academic_yearData}</td>
-                        <td>${curriculum.department_id}</td>
-                        <td>${curriculum.stream_id}</td>
-                        <td>${curriculum.semester_id}</td> 
-                        <td>${curriculum.class_id}</td>
-                        <td>${curriculum.section_id}</td>
+                        <td>${departmentData}</td>
+                        <td>${streamData}</td>
+                        <td>${semesterData}</td> 
+                        <td>${classData}</td>
+                        <td>${sectionData}</td>
                         <td>${subjectData}</td>
                         <td>${teacherData}</td>                      
                         <td>${curriculum.title}</td>

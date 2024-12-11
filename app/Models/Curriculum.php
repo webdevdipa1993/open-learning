@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\AcademicYear;
 use App\Models\Teacher;
 use App\Models\Subject;
+use App\Models\Grade;
 
 class Curriculum extends Model
 {
@@ -28,9 +29,47 @@ class Curriculum extends Model
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
+
     // subject_id Subject relationship
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
     }
+
+    // department_id Department relationship
+    public function department()
+    {
+        return $this->belongsTo(Grade::class, 'department_id');
+    }
+
+    // stream_id Grade relationship
+    public function stream()
+    {
+        return $this->belongsTo(Grade::class, 'stream_id');
+    }
+
+    // semester_id Grade relationship
+    public function semester()
+    {
+        return $this->belongsTo(Grade::class, 'semester_id');
+    }
+
+    // class_id Grade relationship
+    public function class()
+    {
+        return $this->belongsTo(Grade::class, 'class_id');
+    }
+
+    // section_id Grade relationship
+    public function section()
+    {
+        return $this->belongsTo(Grade::class, 'section_id');
+    }
+
+
+
+
+
+
+
 }
