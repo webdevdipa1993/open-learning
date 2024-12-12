@@ -21,6 +21,7 @@
                                 <th scope="col">Code</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Status</th>
+                                <th scope="col"></th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>

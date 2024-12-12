@@ -45,5 +45,5 @@
 </div>
 @endsection
 
-
+@include('curriculum.modal')
 @include('curriculum.script')

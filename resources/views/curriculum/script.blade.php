@@ -72,6 +72,7 @@ $(document).ready(function() {
                         <td>${curriculum.title}</td>
                         <td>${curriculum.code}</td>
                         <td>${curriculum.description}</td>
+                        <td>${curriculum.status}</td>
                         <td>
                             <button class="btn btn-sm btn-warning editCurriculum" data-id="${curriculum.id}">Edit</button>
                             <button class="btn btn-sm btn-danger deleteCurriculum" data-id="${curriculum.id}">Delete</button>
@@ -84,7 +85,81 @@ $(document).ready(function() {
     }
 
     // Initial fetch
-    fetchCurriculums();
+    fetchCurriculums()
+
+
+    // Show modal for adding a new curriculum
+    $('.newCurriculum').click(function() {
+        $('#curriculumForm')[0].reset();
+        $('#curriculumId').val(''); // form hidden record id
+        $('#curriculumModal').modal('show');// modal id
+    });
+
+
+
+
+    // Save curriculum (add/edit) saveCurriculum
+    $('.saveCurriculum').click(function() {
+        let id = $('#curriculumId').val();
+        let url = id ? `/api/curriculum/${id}` : '/api/curriculum';
+        let method = id ? 'PUT' : 'POST';
+        let status = $('#statusToggle').is(':checked') ? 'active' : 'inactive';
+
+        $.ajax({
+            url: url,
+            method: method,
+            data: {
+                title: $('#title').val(),
+                code: $('#code').val(),
+                description: $('#description').val(),
+                status: status,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function() {
+                $('#curriculumModal').modal('hide');
+                fetchCurriculums(); // A function that fetches the list of curriculums to refresh the table or view
+            }
+        });
+    });
+
+
+    // Edit curriculum
+    $(document).on('click', '.editCurriculum', function() {
+        let id = $(this).data('id');
+        $.ajax({
+            url: `/api/curriculum/${id}`,
+            method: 'GET',
+            success: function(data) {
+                $('#curriculumId').val(data.id);
+                $('#title').val(data.title); // Setting title value
+                $('#code').val(data.code); // Setting code value
+                $('#description').val(data.description); // Setting description value
+
+                // Set the status toggle based on the fetched data
+                if (data.status === 'active') {
+                    $('#statusToggle').prop('checked', true);
+                } else {
+                    $('#statusToggle').prop('checked', false);
+                }
+
+                // Show the modal
+                $('#curriculumModal').modal('show');
+            }
+        });
+    });
+
+
+    // Delete curriculum
+    $(document).on('click', '.deleteCurriculum', function() {
+        let id = $(this).data('id');
+        $.ajax({
+            url: `/api/curriculum/${id}`,
+            method: 'DELETE',
+            success: function(data) {
+                fetchCurriculums();
+            }
+        });
+    });
 
 });
 </script>

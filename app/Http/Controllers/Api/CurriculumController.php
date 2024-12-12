@@ -24,7 +24,15 @@ class CurriculumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:250',
+            'code' => 'required|string|max:100',
+            'description' => 'required|string|max:1000',
+            'status' => 'required|in:active,inactive',
+        ]);
+    
+        $record = Curriculum::create($validated);
+        return response()->json($record, 201); // 201 Created
     }
 
     /**
@@ -32,7 +40,8 @@ class CurriculumController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $record = Curriculum::findOrFail($id);
+        return response()->json($record, 200);
     }
 
     /**
@@ -40,7 +49,17 @@ class CurriculumController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:250',
+            'code' => 'required|string|max:100',
+            'description' => 'required|string|max:1000',
+            'status' => 'required|in:active,inactive', 
+        ]);
+
+        $record = Curriculum::findOrFail($id);
+        $record->update($validated);
+
+        return response()->json($record, 200); // 200 OK
     }
 
     /**
@@ -48,6 +67,9 @@ class CurriculumController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $record = Curriculum::findOrFail($id);
+        $record->delete();
+
+        return response()->json(null, 204); // 204 No Content //
     }
 }
