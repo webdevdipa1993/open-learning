@@ -111,25 +111,6 @@ $(document).ready(function() {
     });
  
 
-    // Fetch grades from API and populate table
-    function loadParentGrades(parentId) {
-        // Load parent grades on page load
-        $.ajax({
-            url: '/api/grades/parents', // Endpoint to fetch parent grades
-            method: 'GET',
-            success: function(data) {
-                // Clear and populate the dropdown
-                $('#parent_id').empty();
-                $('#parent_id').append('<option value="">Choose Parent Grade</option>');
-                data.forEach(function(grade) {
-                    $('#parent_id').append(`<option value="${grade.id}" `((parseInt(parentId) > 0 && grade.id === parentId) ? 'selected = "selected"' : '')`>${grade.title} [${grade.code}/${grade.type}] </option>`);
-                });
-            },
-            error: function() {
-                alert('Failed to load parent grades.');
-            }
-        });
-    }
     
     // Fetch grades from API and populate the dropdown
     function loadParentGrades(parentId) {
