@@ -23,6 +23,13 @@
                         <textarea class="form-control" id="description" rows="4" placeholder="Enter curriculum Description" required></textarea>
                     </div>
 
+                    <!-- Teacher => teacher_id -->
+                    <div class="form-group">
+                        <label for="teacher_id">Select Teacher</label>
+                        <select class="form-control" id="teacher_id" name="teacher_id">
+                        </select>
+                    </div>
+
 
                     <!-- Status Toggle -->
                     <div class="form-group">

@@ -92,10 +92,9 @@ $(document).ready(function() {
     $('.newCurriculum').click(function() {
         $('#curriculumForm')[0].reset();
         $('#curriculumId').val(''); // form hidden record id
+        loadTeachers();
         $('#curriculumModal').modal('show');// modal id
     });
-
-
 
 
     // Save curriculum (add/edit) saveCurriculum
@@ -142,6 +141,8 @@ $(document).ready(function() {
                     $('#statusToggle').prop('checked', false);
                 }
 
+                loadTeachers(data.teacher_id);
+
                 // Show the modal
                 $('#curriculumModal').modal('show');
             }
@@ -161,6 +162,31 @@ $(document).ready(function() {
         });
     });
 
+
+    // Fetch teachers from API and populate the dropdown
+    function loadTeachers(teacherId) {
+        // Send an AJAX request to fetch teachers
+        $.ajax({
+            url: '/api/curriculums/teachers', // Endpoint to fetch teachers
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#teacher_id').empty();
+                $('#teacher_id').append('<option value="">Choose Teacher</option>');
+
+                // Loop through the teachers and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the teacher's ID matches the teacherId to mark it as selected
+                    const selected = parseInt(teacherId) > 0 && row.id === parseInt(teacherId) ? 'selected="selected"' : '';
+                    $('#teacher_id').append(`<option value="${row.id}" ${selected}>${row.first_name} ${row.last_name} [${row.employee_code}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load teachers.');
+            }
+        });
+    }
 });
 </script>
 @endsection

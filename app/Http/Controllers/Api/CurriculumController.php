@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Curriculum;
 use Illuminate\Validation\Rule;
+use App\Models\Teacher;
 
 class CurriculumController extends Controller
 {
@@ -71,5 +72,16 @@ class CurriculumController extends Controller
         $record->delete();
 
         return response()->json(null, 204); // 204 No Content //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function getTeachers()
+    {
+        $list = Teacher::select('id', 'first_name', 'last_name', 'employee_code')
+                        ->where(['status' => 'active'])
+                        ->get();                 
+        return response()->json($list);
     }
 }
