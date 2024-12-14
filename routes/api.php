@@ -30,4 +30,5 @@ Route::get('grades/parents', [GradeController::class, 'getParentGrades']);//->na
 Route::apiResource('teacher', TeacherController::class);
 Route::apiResource('student', StudentController::class);
 Route::apiResource('curriculum', CurriculumController::class);
-Route::get('curriculums/teachers', [CurriculumController::class, 'getTeachers']);//->name('getTeachersForCurriculum');
+Route::get('curriculums/teachers', [CurriculumController::class, 'getTeachers'])->name('getTeachersForCurriculum');
+Route::get('curriculums/subjects', [CurriculumController::class, 'getSubjects'])->name('getSubjectsForCurriculum');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Curriculum;
 use Illuminate\Validation\Rule;
 use App\Models\Teacher;
+use App\Models\Subject;
 
 class CurriculumController extends Controller
 {
@@ -80,6 +81,14 @@ class CurriculumController extends Controller
     public function getTeachers()
     {
         $list = Teacher::select('id', 'first_name', 'last_name', 'employee_code')
+                        ->where(['status' => 'active'])
+                        ->get();                 
+        return response()->json($list);
+    }
+
+    public function getSubjects()
+    {
+        $list = Subject::select('id', 'title', 'code',)
                         ->where(['status' => 'active'])
                         ->get();                 
         return response()->json($list);

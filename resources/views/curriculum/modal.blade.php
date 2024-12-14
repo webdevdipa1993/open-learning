@@ -30,6 +30,13 @@
                         </select>
                     </div>
 
+                    <!-- Subject => subject_id -->
+                    <div class="form-group">
+                        <label for="subject_id">Select Subject</label>
+                        <select class="form-control" id="subject_id" name="subject_id">
+                        </select>
+                    </div>
+
 
                     <!-- Status Toggle -->
                     <div class="form-group">

@@ -88,11 +88,63 @@ $(document).ready(function() {
     fetchCurriculums()
 
 
+    // Fetch teachers from API and populate the dropdown
+    function loadTeachers(teacherId) {
+        // Send an AJAX request to fetch teachers
+        $.ajax({
+            url: "{{ route('getTeachersForCurriculum') }}", // Endpoint to fetch teachers
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#teacher_id').empty();
+                $('#teacher_id').append('<option value="">Choose Teacher</option>');
+
+                // Loop through the teachers and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the teacher's ID matches the teacherId to mark it as selected
+                    const selected = parseInt(teacherId) > 0 && row.id === parseInt(teacherId) ? 'selected="selected"' : '';
+                    $('#teacher_id').append(`<option value="${row.id}" ${selected}>${row.first_name} ${row.last_name} [${row.employee_code}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load teachers.');
+            }
+        });
+    }
+
+    // Fetch subjects from API and populate the dropdown
+    function loadSubjects(subjectId) {
+        // Send an AJAX request to fetch subjects
+        $.ajax({
+            url: "{{ route('getSubjectsForCurriculum') }}", // Endpoint to fetch subjects
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#subject_id').empty();
+                $('#subject_id').append('<option value="">Choose Subject</option>');
+
+                // Loop through the subjects and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the subject's ID matches the subjectId to mark it as selected
+                    const selected = parseInt(subjectId) > 0 && row.id === parseInt(subjectId) ? 'selected="selected"' : '';
+                    $('#subject_id').append(`<option value="${row.id}" ${selected}>${row.title} [${row.code}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load subjects.');
+            }
+        });
+    }
+
+
     // Show modal for adding a new curriculum
     $('.newCurriculum').click(function() {
         $('#curriculumForm')[0].reset();
         $('#curriculumId').val(''); // form hidden record id
         loadTeachers();
+        loadSubjects();
         $('#curriculumModal').modal('show');// modal id
     });
 
@@ -142,6 +194,7 @@ $(document).ready(function() {
                 }
 
                 loadTeachers(data.teacher_id);
+                loadSubjects(data.subject_id);
 
                 // Show the modal
                 $('#curriculumModal').modal('show');
@@ -162,31 +215,6 @@ $(document).ready(function() {
         });
     });
 
-
-    // Fetch teachers from API and populate the dropdown
-    function loadTeachers(teacherId) {
-        // Send an AJAX request to fetch teachers
-        $.ajax({
-            url: '/api/curriculums/teachers', // Endpoint to fetch teachers
-            method: 'GET',
-            success: function(data) {
-                // Clear the dropdown and add the default option
-                $('#teacher_id').empty();
-                $('#teacher_id').append('<option value="">Choose Teacher</option>');
-
-                // Loop through the teachers and populate the dropdown
-                data.forEach(function(row) {
-                    // Check if the teacher's ID matches the teacherId to mark it as selected
-                    const selected = parseInt(teacherId) > 0 && row.id === parseInt(teacherId) ? 'selected="selected"' : '';
-                    $('#teacher_id').append(`<option value="${row.id}" ${selected}>${row.first_name} ${row.last_name} [${row.employee_code}]</option>`);
-                });
-            },
-            error: function() {
-                // Handle the error case
-                alert('Failed to load teachers.');
-            }
-        });
-    }
 });
 </script>
 @endsection
