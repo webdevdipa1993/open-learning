@@ -138,13 +138,41 @@ $(document).ready(function() {
         });
     }
 
+    // Fetch academicyears from API and populate the dropdown
+    function loadAcademicYears(academicYearId) {
+        // Send an AJAX request to fetch academicyears
+        $.ajax({
+            url: "{{ route('getAcademicYearsForCurriculum') }}", // Endpoint to fetch academicyears
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#academic_year_id').empty();
+                $('#academic_year_id').append('<option value="">Choose AcademicYear</option>');
+
+                // Loop through the academicyears and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the academicyear's ID matches the academicYearId to mark it as selected
+                    const selected = parseInt(academicYearId) > 0 && row.id === parseInt(academicYearId) ? 'selected="selected"' : '';
+                    $('#academic_year_id').append(`<option value="${row.id}" ${selected}>${row.title} [${row.start_date} - ${row.end_date}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load academicyears.');
+            }
+        });
+    }
+
 
     // Show modal for adding a new curriculum
     $('.newCurriculum').click(function() {
         $('#curriculumForm')[0].reset();
         $('#curriculumId').val(''); // form hidden record id
+
         loadTeachers();
         loadSubjects();
+        loadAcademicYears();
+
         $('#curriculumModal').modal('show');// modal id
     });
 
@@ -195,6 +223,7 @@ $(document).ready(function() {
 
                 loadTeachers(data.teacher_id);
                 loadSubjects(data.subject_id);
+                loadAcademicYears(data.academic_year_id);
 
                 // Show the modal
                 $('#curriculumModal').modal('show');
