@@ -213,6 +213,31 @@ $(document).ready(function() {
         });
     }
 
+    // Fetch semesters from API and populate the dropdown
+    function loadSemesters(semesterId) {
+        // Send an AJAX request to fetch semesters
+        $.ajax({
+            url: "{{ route('getSemestersForCurriculum') }}", // Endpoint to fetch semesters
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#semester_id').empty();
+                $('#semester_id').append('<option value="">Choose Semesters</option>');
+
+                // Loop through the semesters and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the semester's ID matches the semesterId to mark it as selected
+                    const selected = parseInt(semesterId) > 0 && row.id === parseInt(semesterId) ? 'selected="selected"' : '';
+                    $('#semester_id').append(`<option value="${row.id}" ${selected}>${row.title} [${row.code}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load semesters.');
+            }
+        });
+    }
+
 
     // Show modal for adding a new curriculum
     $('.newCurriculum').click(function() {
@@ -224,6 +249,7 @@ $(document).ready(function() {
         loadAcademicYears();
         loadStreams();
         loadDepartments();
+        loadSemesters();
 
         $('#curriculumModal').modal('show');// modal id
     });
@@ -278,6 +304,7 @@ $(document).ready(function() {
                 loadAcademicYears(data.academic_year_id);
                 loadStreams(data.stream_id);
                 loadDepartments(data.department_id);
+                loadSemesters(data.semester_id);
 
                 // Show the modal
                 $('#curriculumModal').modal('show');

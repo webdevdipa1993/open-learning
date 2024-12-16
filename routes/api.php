@@ -35,3 +35,4 @@ Route::get('curriculums/subjects', [CurriculumController::class, 'getSubjects'])
 Route::get('curriculums/academic-years', [CurriculumController::class, 'getAcademicYears'])->name('getAcademicYearsForCurriculum');
 Route::get('curriculums/streams', [CurriculumController::class, 'getStreams'])->name('getStreamsForCurriculum');
 Route::get('curriculums/departments', [CurriculumController::class, 'getDepartments'])->name('getDepartmentsForCurriculum');
+Route::get('curriculums/semesters', [CurriculumController::class, 'getSemesters'])->name('getSemestersForCurriculum');
