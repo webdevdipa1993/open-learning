@@ -66,15 +66,16 @@
                             </div>
                         </div>
 
-                        <?php /*
                         <div class="col-md-4">
                             <!-- Grade => department_id -->
                             <div class="form-group">
-                                <label for="academic_year_id">Select Academic Year</label>
-                                <select class="form-control" id="academic_year_id" name="academic_year_id">
+                                <label for="department_id">Select Department</label>
+                                <select class="form-control" id="department_id" name="department_id">
                                 </select>
                             </div>
                         </div>
+
+                        <?php /*
                         <div class="col-md-4">
                             <!-- Grade => semester_id -->
                             <div class="form-group">

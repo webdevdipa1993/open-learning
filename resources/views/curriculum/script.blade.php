@@ -188,6 +188,31 @@ $(document).ready(function() {
         });
     }
 
+    // Fetch departments from API and populate the dropdown
+    function loadDepartments(departmentId) {
+        // Send an AJAX request to fetch departments
+        $.ajax({
+            url: "{{ route('getDepartmentsForCurriculum') }}", // Endpoint to fetch departments
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#department_id').empty();
+                $('#department_id').append('<option value="">Choose Departments</option>');
+
+                // Loop through the departments and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the department's ID matches the departmentId to mark it as selected
+                    const selected = parseInt(departmentId) > 0 && row.id === parseInt(departmentId) ? 'selected="selected"' : '';
+                    $('#department_id').append(`<option value="${row.id}" ${selected}>${row.title} [${row.code}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load departments.');
+            }
+        });
+    }
+
 
     // Show modal for adding a new curriculum
     $('.newCurriculum').click(function() {
@@ -198,6 +223,7 @@ $(document).ready(function() {
         loadSubjects();
         loadAcademicYears();
         loadStreams();
+        loadDepartments();
 
         $('#curriculumModal').modal('show');// modal id
     });
@@ -251,6 +277,7 @@ $(document).ready(function() {
                 loadSubjects(data.subject_id);
                 loadAcademicYears(data.academic_year_id);
                 loadStreams(data.stream_id);
+                loadDepartments(data.department_id);
 
                 // Show the modal
                 $('#curriculumModal').modal('show');
