@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Teacher;
 use App\Models\Subject;
 use App\Models\AcademicYear;
+use App\Models\Grade;
 
 class CurriculumController extends Controller
 {
@@ -99,6 +100,14 @@ class CurriculumController extends Controller
     {
         $list = AcademicYear::select('id', 'start_date', 'end_date', 'title')
                         ->where(['status' => 'active'])
+                        ->get();                 
+        return response()->json($list);
+    }
+
+    public function getStreams()
+    {
+        $list = Grade::select('id', 'title', 'code')
+                        ->where(['status' => 'active', 'type' => 'stream'])
                         ->get();                 
         return response()->json($list);
     }

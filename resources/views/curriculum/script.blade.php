@@ -163,6 +163,31 @@ $(document).ready(function() {
         });
     }
 
+    // Fetch streams from API and populate the dropdown
+    function loadStreams(streamId) {
+        // Send an AJAX request to fetch streams
+        $.ajax({
+            url: "{{ route('getStreamsForCurriculum') }}", // Endpoint to fetch streams
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#stream_id').empty();
+                $('#stream_id').append('<option value="">Choose Streams</option>');
+
+                // Loop through the streams and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the stream's ID matches the streamId to mark it as selected
+                    const selected = parseInt(streamId) > 0 && row.id === parseInt(streamId) ? 'selected="selected"' : '';
+                    $('#stream_id').append(`<option value="${row.id}" ${selected}>${row.title} [${row.code}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load streams.');
+            }
+        });
+    }
+
 
     // Show modal for adding a new curriculum
     $('.newCurriculum').click(function() {
@@ -172,6 +197,7 @@ $(document).ready(function() {
         loadTeachers();
         loadSubjects();
         loadAcademicYears();
+        loadStreams();
 
         $('#curriculumModal').modal('show');// modal id
     });
@@ -224,6 +250,7 @@ $(document).ready(function() {
                 loadTeachers(data.teacher_id);
                 loadSubjects(data.subject_id);
                 loadAcademicYears(data.academic_year_id);
+                loadStreams(data.stream_id);
 
                 // Show the modal
                 $('#curriculumModal').modal('show');

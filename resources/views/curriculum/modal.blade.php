@@ -56,18 +56,19 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        <div class="col-md-4">
+                            <!-- Grade => stream_id -->
+                            <div class="form-group">
+                                <label for="stream_id">Select Stream</label>
+                                <select class="form-control" id="stream_id" name="stream_id">
+                                </select>
+                            </div>
+                        </div>
 
                         <?php /*
                         <div class="col-md-4">
                             <!-- Grade => department_id -->
-                            <div class="form-group">
-                                <label for="academic_year_id">Select Academic Year</label>
-                                <select class="form-control" id="academic_year_id" name="academic_year_id">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <!-- Grade => stream_id -->
                             <div class="form-group">
                                 <label for="academic_year_id">Select Academic Year</label>
                                 <select class="form-control" id="academic_year_id" name="academic_year_id">

@@ -33,3 +33,4 @@ Route::apiResource('curriculum', CurriculumController::class);
 Route::get('curriculums/teachers', [CurriculumController::class, 'getTeachers'])->name('getTeachersForCurriculum');
 Route::get('curriculums/subjects', [CurriculumController::class, 'getSubjects'])->name('getSubjectsForCurriculum');
 Route::get('curriculums/academic-years', [CurriculumController::class, 'getAcademicYears'])->name('getAcademicYearsForCurriculum');
+Route::get('curriculums/streams', [CurriculumController::class, 'getStreams'])->name('getStreamsForCurriculum');
