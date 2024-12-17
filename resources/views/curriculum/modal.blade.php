@@ -93,18 +93,15 @@
                             </div>
                         </div>
 
-                        <?php /*
                         <div class="col-md-4">
                             <!-- Grade => class_id -->
                             <div class="form-group">
-                                <label for="academic_year_id">Select Academic Year</label>
-                                <select class="form-control" id="academic_year_id" name="academic_year_id">
+                                <label for="class_id">Select class</label>
+                                <select class="form-control" id="class_id" name="class_id">
                                 </select>
                             </div>
                         </div>
                         
-                        */ ?>
-
                         <div class="col-md-4">
                             <!-- Status Toggle -->
                             <div class="form-group">

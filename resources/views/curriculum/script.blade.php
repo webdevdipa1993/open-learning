@@ -263,6 +263,31 @@ $(document).ready(function() {
         });
     }
 
+    // Fetch classes from API and populate the dropdown
+    function loadClasses(classId) {
+        // Send an AJAX request to fetch classes
+        $.ajax({
+            url: "{{ route('getClassesForCurriculum') }}", // Endpoint to fetch classes
+            method: 'GET',
+            success: function(data) {
+                // Clear the dropdown and add the default option
+                $('#class_id').empty();
+                $('#class_id').append('<option value="">Choose classes</option>');
+
+                // Loop through the classes and populate the dropdown
+                data.forEach(function(row) {
+                    // Check if the class's ID matches the classId to mark it as selected
+                    const selected = parseInt(classId) > 0 && row.id === parseInt(classId) ? 'selected="selected"' : '';
+                    $('#class_id').append(`<option value="${row.id}" ${selected}>${row.title} [${row.code}]</option>`);
+                });
+            },
+            error: function() {
+                // Handle the error case
+                alert('Failed to load classes.');
+            }
+        });
+    }
+
 
     // Show modal for adding a new curriculum
     $('.newCurriculum').click(function() {
@@ -276,6 +301,7 @@ $(document).ready(function() {
         loadDepartments();
         loadSemesters();
         loadSections();
+        loadClasses();
 
         $('#curriculumModal').modal('show');// modal id
     });
@@ -332,6 +358,7 @@ $(document).ready(function() {
                 loadDepartments(data.department_id);
                 loadSemesters(data.semester_id);
                 loadSections(data.section_id);
+                loadClasses(data.class_id);
 
                 // Show the modal
                 $('#curriculumModal').modal('show');
