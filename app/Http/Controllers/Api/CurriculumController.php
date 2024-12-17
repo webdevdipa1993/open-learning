@@ -127,4 +127,12 @@ class CurriculumController extends Controller
                         ->get();                 
         return response()->json($list);
     }
+
+    public function getSections()
+    {
+        $list = Grade::select('id', 'title', 'code')
+                        ->where(['status' => 'active', 'type' => 'section'])
+                        ->get();                 
+        return response()->json($list);
+    }
 }

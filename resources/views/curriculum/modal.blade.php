@@ -84,6 +84,15 @@
                             </div>
                         </div>
 
+                        <div class="col-md-4">
+                            <!-- Grade => section_id -->
+                            <div class="form-group">
+                                <label for="section_id">Select Section </label>
+                                <select class="form-control" id="section_id" name="section_id">
+                                </select>
+                            </div>
+                        </div>
+
                         <?php /*
                         <div class="col-md-4">
                             <!-- Grade => class_id -->
@@ -93,14 +102,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <!-- Grade => section_id -->
-                            <div class="form-group">
-                                <label for="academic_year_id">Select Academic Year</label>
-                                <select class="form-control" id="academic_year_id" name="academic_year_id">
-                                </select>
-                            </div>
-                        </div>
+                        
                         */ ?>
 
                         <div class="col-md-4">
