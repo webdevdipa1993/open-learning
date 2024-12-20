@@ -33,6 +33,47 @@ class CurriculumController extends Controller
             'code' => 'required|string|max:100',
             'description' => 'required|string|max:1000',
             'status' => 'required|in:active,inactive',
+            // '', 'stream_id', 'semester_id', 'class_id','section_id','subject_id',
+            'academic_year_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Must be an integer
+                Rule::exists('academic_years', 'id'), // Must exist in the `academic_years` table
+            ],
+            'teacher_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Must be an integer
+                Rule::exists('teachers', 'id'), // Must exist in the `teachers` table
+            ],
+            'subject_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Parent ID must be an integer
+                Rule::exists('subjects', 'id'), // Parent ID must exist in the teachers table
+            ],
+            'department_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'stream_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'semester_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'class_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'section_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
         ]);
     
         $record = Curriculum::create($validated);
@@ -57,7 +98,48 @@ class CurriculumController extends Controller
             'title' => 'required|string|max:250',
             'code' => 'required|string|max:100',
             'description' => 'required|string|max:1000',
-            'status' => 'required|in:active,inactive', 
+            'status' => 'required|in:active,inactive',
+            
+            'academic_year_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Must be an integer
+                Rule::exists('academic_years', 'id'), // Must exist in the `academic_years` table
+            ],
+            'teacher_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Parent ID must be an integer
+                Rule::exists('teachers', 'id'), // Parent ID must exist in the teachers table
+            ],
+            'subject_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Parent ID must be an integer
+                Rule::exists('subjects', 'id'), // Parent ID must exist in the teachers table
+            ],
+            'department_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Parent ID must be an integer
+                Rule::exists('grades', 'id'), // Parent ID must exist in the teachers table
+            ],
+            'stream_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'semester_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'class_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'section_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
         ]);
 
         $record = Curriculum::findOrFail($id);

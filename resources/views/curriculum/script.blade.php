@@ -322,6 +322,14 @@ $(document).ready(function() {
                 code: $('#code').val(),
                 description: $('#description').val(),
                 status: status,
+                academic_year_id: $('#academic_year_id').val(),
+                department_id: $('#department_id').val(),
+                stream_id: $('#stream_id').val(),
+                semester_id: $('#semester_id').val(),
+                class_id: $('#class_id').val(),
+                section_id: $('#section_id').val(),
+                subject_id: $('#subject_id').val(),
+                teacher_id: $('#teacher_id').val(),
                 _token: '{{ csrf_token() }}'
             },
             success: function() {
