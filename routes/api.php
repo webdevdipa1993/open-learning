@@ -29,6 +29,13 @@ Route::apiResource('grade', GradeController::class);
 Route::get('grades/parents', [GradeController::class, 'getParentGrades']);//->name('getParentGradesForGrade');
 Route::apiResource('teacher', TeacherController::class);
 Route::apiResource('student', StudentController::class);
+Route::get('students/academic-years', [StudentController::class, 'getAcademicYears'])->name('getAcademicYearsForStudent');
+Route::get('students/streams', [StudentController::class, 'getStreams'])->name('getStreamsForStudent');
+Route::get('students/departments', [StudentController::class, 'getDepartments'])->name('getDepartmentsForStudent');
+Route::get('students/semesters', [StudentController::class, 'getSemesters'])->name('getSemestersForStudent');
+Route::get('students/sections', [StudentController::class, 'getSections'])->name('getSectionsForStudent');
+Route::get('students/classes', [StudentController::class, 'getClasses'])->name('getClassesForStudent');
+
 Route::apiResource('curriculum', CurriculumController::class);
 Route::get('curriculums/teachers', [CurriculumController::class, 'getTeachers'])->name('getTeachersForCurriculum');
 Route::get('curriculums/subjects', [CurriculumController::class, 'getSubjects'])->name('getSubjectsForCurriculum');

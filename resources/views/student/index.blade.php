@@ -17,10 +17,16 @@
                         <thead class="table-light">
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">First_name</th>
-                                <th scope="col">Last_name</th>
-                                <th scope="col">Date_of_birth</th>
+                                <th scope="col">First name</th>
+                                <th scope="col">Last name</th>
+                                <th scope="col">Date of birth</th>
                                 <th scope="col">Gender</th>
+                                <th scope="col">Academic year </th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Stream</th>
+                                <th scope="col">Semester</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">Section</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Actions</th>
                             </tr>

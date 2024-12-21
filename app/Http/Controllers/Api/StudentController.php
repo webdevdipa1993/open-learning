@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Validation\Rule;
+use App\Models\AcademicYear;
+use App\Models\Grade;
+
+
 class StudentController extends Controller
 {
     /**
@@ -13,7 +17,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $records = Student::all();
+        $records = Student::with(['academic_year', 'department', 'stream', 'semester', 'class', 'section'])->get();
+        // print_r($records);
         return response()->json($records, 200);
     }
 
@@ -28,6 +33,37 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'gender' => 'required|in:male,female,other',
             'status' => 'required|in:active,inactive',
+
+            'academic_year_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Must be an integer
+                Rule::exists('academic_years', 'id'), // Must exist in the `academic_years` table
+            ],
+            'department_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Parent ID must be an integer
+                Rule::exists('grades', 'id'), // Parent ID must exist in the teachers table
+            ],
+            'stream_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'semester_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'class_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'section_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
         ]);
     
         $record = Student::create($validated);
@@ -55,6 +91,37 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'gender' => 'required|in:male,female,other',
             'status' => 'required|in:active,inactive',
+
+            'academic_year_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Must be an integer
+                Rule::exists('academic_years', 'id'), // Must exist in the `academic_years` table
+            ],
+            'department_id' => [
+                // 'nullable', // Parent ID is optional
+                'integer', // Parent ID must be an integer
+                Rule::exists('grades', 'id'), // Parent ID must exist in the teachers table
+            ],
+            'stream_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'semester_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'class_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
+            'section_id' => [
+                'nullable', // optional
+                'integer', // Must be an integer
+                Rule::exists('grades', 'id'), // Must exist in the `grades` table
+            ],
         ]);
         
         $record = Student::findOrFail($id);
@@ -72,5 +139,57 @@ class StudentController extends Controller
         $record->delete();
 
         return response()->json(null, 204); // 204 No Content //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+
+    public function getAcademicYears()
+    {
+        $list = AcademicYear::select('id', 'start_date', 'end_date', 'title')
+                        ->where(['status' => 'active'])
+                        ->get();                 
+        return response()->json($list);
+    }
+
+    public function getStreams()
+    {
+        $list = Grade::select('id', 'title', 'code')
+                        ->where(['status' => 'active', 'type' => 'stream'])
+                        ->get();                 
+        return response()->json($list);
+    }
+
+    public function getDepartments()
+    {
+        $list = Grade::select('id', 'title', 'code')
+                        ->where(['status' => 'active', 'type' => 'department'])
+                        ->get();                 
+        return response()->json($list);
+    }
+
+    public function getSemesters()
+    {
+        $list = Grade::select('id', 'title', 'code')
+                        ->where(['status' => 'active', 'type' => 'semester'])
+                        ->get();                 
+        return response()->json($list);
+    }
+
+    public function getSections()
+    {
+        $list = Grade::select('id', 'title', 'code')
+                        ->where(['status' => 'active', 'type' => 'section'])
+                        ->get();                 
+        return response()->json($list);
+    }
+
+    public function getClasses()
+    {
+        $list = Grade::select('id', 'title', 'code')
+                        ->where(['status' => 'active', 'type' => 'class'])
+                        ->get();                 
+        return response()->json($list);
     }
 }
