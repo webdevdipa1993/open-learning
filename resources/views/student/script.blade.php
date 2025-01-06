@@ -254,6 +254,8 @@ $(document).ready(function() {
             data: {
                 first_name: $('#first_name').val(),
                 last_name: $('#last_name').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
                 date_of_birth: $('#date_of_birth').val(),
                 gender: $('#gender').val(),
                 status: status,

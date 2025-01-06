@@ -6,20 +6,51 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\AcademicYear;
 use App\Models\Grade;
-class Student extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable; 
+use Illuminate\Notifications\Notifiable;
+
+class Student extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     // Specify the table name
     protected $table = 'students';
-
-    protected $fillable = ['first_name', 'last_name', 'date_of_birth', 'gender', 'academic_year_id', 'department_id', 'stream_id', 'semester_id', 'class_id', 'section_id', 'status'];
     
+    // Primary Key
+    protected $primaryKey = 'id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = ['first_name', 'last_name', 'date_of_birth', 'gender', 'academic_year_id', 'department_id', 'stream_id', 'semester_id', 'class_id', 'section_id', 'status', 'email', 'password',];
+    
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
     // make created_at & updated_at included into fillable & workable 
     public $timestamps = true;
 
     // // remove primary key & id 
-    // protected $primaryKey = null; // No primary key
+    // protected $primaryKey = 'id'; 
     // public $incrementing = false; // Disable auto-increment
 
     // academic_year_id AcademicYear relationship
@@ -57,8 +88,4 @@ class Student extends Model
     {
         return $this->belongsTo(Grade::class, 'section_id');
     }
-
-
-
-
 }

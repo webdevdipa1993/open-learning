@@ -8,7 +8,7 @@ use App\Models\Student;
 use Illuminate\Validation\Rule;
 use App\Models\AcademicYear;
 use App\Models\Grade;
-
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -30,6 +30,8 @@ class StudentController extends Controller
         $validated = $request->validate([
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
             'date_of_birth' => 'required|date',
             'gender' => 'required|in:male,female,other',
             'status' => 'required|in:active,inactive',
@@ -65,7 +67,9 @@ class StudentController extends Controller
                 Rule::exists('grades', 'id'), // Must exist in the `grades` table
             ],
         ]);
-    
+        // password is getting encrypted 
+        $validated['password'] = Hash::make($request->password);
+
         $record = Student::create($validated);
         return response()->json($record, 201); // 201 Created
     }
@@ -88,6 +92,8 @@ class StudentController extends Controller
         $validated = $request->validate([
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
             'date_of_birth' => 'required|date',
             'gender' => 'required|in:male,female,other',
             'status' => 'required|in:active,inactive',
@@ -122,8 +128,11 @@ class StudentController extends Controller
                 'integer', // Must be an integer
                 Rule::exists('grades', 'id'), // Must exist in the `grades` table
             ],
-        ]);
-        
+        ]);        
+        // password is getting encrypted 
+        $validated['password'] = Hash::make($request->password);
+        // $validated['date_of_birth'] = 'Hi I born on ' . $validated['date_of_birth'];
+
         $record = Student::findOrFail($id);
         $record->update($validated);
     
