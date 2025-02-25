@@ -20,6 +20,14 @@
                         <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" required>
                     </div>
                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                    </div>
+                    <div class="form-group">
                         <label for="employee_code">Employee Code</label>
                         <input type="text" class="form-control" id="employee_code" name="employee_code" placeholder="Enter employee code" required>
                     </div>

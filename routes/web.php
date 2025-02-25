@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\StudentAuthController;
+use App\Http\Controllers\Auth\TeacherAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,18 +55,18 @@ Route::group(['prefix' => 'auth'], function () {
         ->name('auth.student.logout')
         ->middleware('auth.student');
 
-    // // Route :: teacher
-    // Route::get('/student/login', function () {
-    //     return view('auth.student.login');
-    // })->name('auth.student.login'); 
-    // Route::post('/student/login', [StudentAuthController::class, 'login'])->name('auth.student.login');
+    //  Route :: teacher
+     Route::get('/teacher/login', function () {
+         return view('auth.teacher.login');
+     })->name('auth.teacher.login'); 
+     Route::post('/teacher/login', [TeacherAuthController::class, 'login'])->name('auth.teacher.login');
 
-    // Route::get('/student/logout', [StudentAuthController::class, 'logout'])
-    //     ->name('auth.student.logout')
-    //     ->middleware('auth.student');
-    // Route::post('/student/logout', [StudentAuthController::class, 'logout'])
-    //     ->name('auth.student.logout')
-    //     ->middleware('auth.student');
+     Route::get('/teacher/logout', [TeacherAuthController::class, 'logout'])
+         ->name('auth.teacher.logout')
+         ->middleware('auth.teacher');
+     Route::post('/student/logout', [TeacherAuthController::class, 'logout'])
+         ->name('auth.teacher.logout')
+         ->middleware('auth.teacher');
 });
 Route::group(['prefix' => 'dashboard'], function () {
     // Route :: student
@@ -73,8 +74,8 @@ Route::group(['prefix' => 'dashboard'], function () {
         return view('dashboard.student');
     })->name('dashboard.student')->middleware('auth.student'); 
     
-    // // Route :: teacher
-    // Route::get('/student', function () {
-    //     return view('dashboard.student');
-    // })->name('dashboard.student')->middleware('auth.student'); 
+     // Route :: teacher
+     Route::get('/teacher', function () {
+         return view('dashboard.teacher');
+     })->name('dashboard.teacher')->middleware('auth.teacher'); 
 });
