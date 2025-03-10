@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\StudentAuthController;
 use App\Http\Controllers\Auth\TeacherAuthController;
+use App\Http\Controllers\Auth\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,7 @@ use App\Http\Controllers\Auth\TeacherAuthController;
 |
 */
 
+// ===============================================================================================
 Route::group(['prefix' => 'entry-master'], function () {
     Route::get('/academic-year', function () {
         return view('academicYear.index');
@@ -39,8 +41,13 @@ Route::group(['prefix' => 'entry-master'], function () {
     Route::get('/curriculum', function () {
         return view('curriculum.index');
     })->name('curriculum.index');
-});
 
+    Route::get('/admin', function () {
+        return view('admin.index');
+    })->name('admin.index');
+
+});
+// ===============================================================================================
 Route::group(['prefix' => 'auth'], function () {    
     // Route :: student
     Route::get('/student/login', function () {
@@ -64,10 +71,25 @@ Route::group(['prefix' => 'auth'], function () {
      Route::get('/teacher/logout', [TeacherAuthController::class, 'logout'])
          ->name('auth.teacher.logout')
          ->middleware('auth.teacher');
-     Route::post('/student/logout', [TeacherAuthController::class, 'logout'])
+     Route::post('/teacher/logout', [TeacherAuthController::class, 'logout'])
          ->name('auth.teacher.logout')
          ->middleware('auth.teacher');
+
+    //  Route :: admin
+    Route::get('/admin/login', function () {
+        return view('auth.admin.login');
+    })->name('auth.admin.login'); 
+    Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('auth.admin.login');
+
+    Route::get('/admin/logout', [AdminAuthController::class, 'logout'])
+        ->name('auth.admin.logout')
+        ->middleware('auth.admin');
+    Route::post('/admin/logout', [AdminAuthController::class, 'logout'])
+        ->name('auth.admin.logout')
+        ->middleware('auth.admin');     
 });
+
+
 Route::group(['prefix' => 'dashboard'], function () {
     // Route :: student
     Route::get('/student', function () {
@@ -78,4 +100,9 @@ Route::group(['prefix' => 'dashboard'], function () {
      Route::get('/teacher', function () {
          return view('dashboard.teacher');
      })->name('dashboard.teacher')->middleware('auth.teacher'); 
+
+    // Route :: admin
+    Route::get('/admin', function () {
+        return view('dashboard.admin');
+    })->name('dashboard.admin')->middleware('auth.admin');  
 });

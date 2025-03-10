@@ -2,47 +2,47 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    // Fetch teachers from API and populate table
-    function fetchTeachers() {
+    // Fetch admins from API and populate table
+    function fetchAdmins() {
         $.ajax({
-            url: '/api/teacher',
+            url: '/api/admin',
             method: 'GET',
             success: function(data) {
                 console.log(data);
                 let rows = '';
-                $.each(data, function(index, teacher) {
+                $.each(data, function(index, admin) {
                     rows += `<tr>
-                        <th scope="row">${teacher.id}</th>
-                        <td>${teacher.first_name}</td>
-                        <td>${teacher.last_name}</td>
-                        <td>${teacher.employee_code}</td>
-                        <td>${teacher.specialization}</td>
-                        <td>${teacher.status}</td>
+                        <th scope="row">${admin.id}</th>
+                        <td>${admin.first_name}</td>
+                        <td>${admin.last_name}</td>
+                        <td>${admin.employee_code}</td>
+                        <td>${admin.specialization}</td>
+                        <td>${admin.status}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning editTeacher" data-id="${teacher.id}">Edit</button>
-                            <button class="btn btn-sm btn-danger deleteTeacher" data-id="${teacher.id}">Delete</button>
+                            <button class="btn btn-sm btn-warning editAdmin" data-id="${admin.id}">Edit</button>
+                            <button class="btn btn-sm btn-danger deleteAdmin" data-id="${admin.id}">Delete</button>
                         </td>
                     </tr>`;
                 });
-                $('#teachersTable tbody').html(rows); 
+                $('#adminsTable tbody').html(rows); 
             }
         });
     }
 
     // Initial fetch
-    fetchTeachers();
+    fetchAdmins();
 
-    // Show modal for adding a new teacher
-    $('.newTeacher').click(function() {
-        $('#teacherForm')[0].reset();
-        $('#teacherId').val('');
-        $('#teacherModal').modal('show');
+    // Show modal for adding a new admin
+    $('.newAdmin').click(function() {
+        $('#adminForm')[0].reset();
+        $('#adminId').val('');
+        $('#adminModal').modal('show');
     });
 
-    // Save teacher (add/edit)
-    $('.saveTeacher').click(function() {
-        let id = $('#teacherId').val();
-        let url = id ? `/api/teacher/${id}` : '/api/teacher';
+    // Save admin (add/edit)
+    $('.saveAdmin').click(function() {
+        let id = $('#adminId').val();
+        let url = id ? `/api/admin/${id}` : '/api/admin';
         let method = id ? 'PUT' : 'POST';
         let status = $('#statusToggle').is(':checked') ? 'active' : 'inactive';
 
@@ -60,21 +60,21 @@ $(document).ready(function() {
                 _token: '{{ csrf_token() }}'
             },
             success: function() {
-                $('#teacherModal').modal('hide');
-                fetchTeachers();
+                $('#adminModal').modal('hide');
+                fetchAdmins();
             }
         });
     });
 
 
-    // Edit teacher
-    $(document).on('click', '.editTeacher', function() {
+    // Edit admin
+    $(document).on('click', '.editAdmin', function() {
         let id = $(this).data('id');
         $.ajax({
-            url: `/api/teacher/${id}`,
+            url: `/api/admin/${id}`,
             method: 'GET',
             success: function(data) {
-                $('#teacherId').val(data.id);
+                $('#adminId').val(data.id);
                 $('#first_name').val(data.first_name);
                 $('#last_name').val(data.last_name);
                 $('#employee_code').val(data.employee_code);
@@ -86,20 +86,20 @@ $(document).ready(function() {
                 } else {
                     $('#statusToggle').prop('checked', false);
                 }
-                $('#teacherModal').modal('show');
+                $('#adminModal').modal('show');
             }
         });
     });
 
 
-    // Delete teacher
-    $(document).on('click', '.deleteTeacher', function() {
+    // Delete admin
+    $(document).on('click', '.deleteAdmin', function() {
         let id = $(this).data('id');
         $.ajax({
-            url: `/api/teacher/${id}`,
+            url: `/api/admin/${id}`,
             method: 'DELETE',
             success: function(data) {
-                fetchTeachers();
+                fetchAdmins();
             }
         });
     });

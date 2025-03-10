@@ -13,13 +13,13 @@
             @endif    
             <!-- the display message ends here -->  
 
-            <h3 class="card-title">Welcome, {{ auth()->guard('teacher')->user()->name }}</h3>
-            <p class="card-text text-muted">{{ auth()->guard('teacher')->user()->email }}</p>
-            <form action="{{ route('auth.teacher.logout') }}" method="POST" class="mt-4">
+            <h3 class="card-title">Welcome, <strong>AS STUDENT</strong> {{ auth()->guard('admin')->user()->name }}</h3>
+            <p class="card-text text-muted">{{ auth()->guard('admin')->user()->email }}</p>
+            <form action="{{ route('auth.admin.logout') }}" method="POST" class="mt-4">
                 @csrf
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
-            <a href="{{ route('auth.teacher.logout') }}"  class="btn btn-danger">  GET-Logout</a>
+            <a href="{{ route('auth.admin.logout') }}"  class="btn btn-danger">  GET-Logout</a>
         </div>
     </div>
 </div>

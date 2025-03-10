@@ -55,6 +55,12 @@
                     <span class="nav-link-text ms-1">Curriculum</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link active bg-gradient-dark text-white" href="{{ route('admin.index') }}">
+                    <i class="material-symbols-rounded opacity-5">table_view</i>
+                    <span class="nav-link-text ms-1">Admin</span>
+                </a>
+            </li>
             <?php /* 
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account pages</h6>

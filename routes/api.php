@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\GradeController;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\CurriculumController;
+use App\Http\Controllers\Api\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,3 +47,4 @@ Route::get('curriculums/departments', [CurriculumController::class, 'getDepartme
 Route::get('curriculums/semesters', [CurriculumController::class, 'getSemesters'])->name('getSemestersForCurriculum');
 Route::get('curriculums/sections', [CurriculumController::class, 'getSections'])->name('getSectionsForCurriculum');
 Route::get('curriculums/classes', [CurriculumController::class, 'getClasses'])->name('getClassesForCurriculum');
+Route::apiResource('admin', AdminController::class);

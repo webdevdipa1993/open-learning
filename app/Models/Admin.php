@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable; 
 use Illuminate\Notifications\Notifiable;
 
-class Teacher extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
-        
+    
     // Specify the table name
-    protected $table = 'teachers';
+    protected $table = 'admins';
 
     // Primary Key
     protected $primaryKey = 'id';
