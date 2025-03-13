@@ -17,7 +17,7 @@ class AdminAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth()->guard('admin')->check()) {
-            return redirect()->route('admin.login')->with('error', 'Access denied. Please login as admin.');
+            return redirect()->route('auth.admin.login')->with('error', 'Access denied. Please login as admin.');
         }
         return $next($request);
     }

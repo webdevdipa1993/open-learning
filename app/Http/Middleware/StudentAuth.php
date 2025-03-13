@@ -17,7 +17,7 @@ class StudentAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth()->guard('student')->check()) {
-            return redirect()->route('student.login')->with('error', 'Access denied. Please login as student.');
+            return redirect()->route('auth.student.login')->with('error', 'Access denied. Please login as student.');
         }
         return $next($request);
     }

@@ -17,7 +17,7 @@ class TeacherAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth()->guard('teacher')->check()) {
-            return redirect()->route('teacher.login')->with('error', 'Access denied. Please login as teacher.');
+            return redirect()->route('auth.teacher.login')->with('error', 'Access denied. Please login as teacher.');
         }
         return $next($request);
     }

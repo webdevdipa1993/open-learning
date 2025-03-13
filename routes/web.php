@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\StudentAuthController;
 use App\Http\Controllers\Auth\TeacherAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,3 +107,7 @@ Route::group(['prefix' => 'dashboard'], function () {
         return view('dashboard.admin');
     })->name('dashboard.admin')->middleware('auth.admin');  
 });
+
+Route::get('/', function () {
+    return view('dashboard');
+})->name('dashboard'); 
