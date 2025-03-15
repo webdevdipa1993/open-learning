@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\StudentAuthController;
 use App\Http\Controllers\Auth\TeacherAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
-use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +46,6 @@ Route::group(['prefix' => 'entry-master'], function () {
     Route::get('/admin', function () {
         return view('admin.index');
     })->name('admin.index');
-
 });
 // ===============================================================================================
 Route::group(['prefix' => 'auth'], function () {    
@@ -91,23 +90,81 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 
-Route::group(['prefix' => 'dashboard'], function () {
-    // Route :: student
-    Route::get('/student', function () {
-        return view('dashboard.student');
-    })->name('dashboard.student')->middleware('auth.student'); 
-    
-     // Route :: teacher
-     Route::get('/teacher', function () {
-         return view('dashboard.teacher');
-     })->name('dashboard.teacher')->middleware('auth.teacher'); 
-
-    // Route :: admin
-    Route::get('/admin', function () {
-        return view('dashboard.admin');
-    })->name('dashboard.admin')->middleware('auth.admin');  
-});
-
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard'); 
+
+// ===============================================================================================
+// student's route
+Route::group(['prefix' => 'student', 'middleware' => ['auth.student']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.student');
+    })->name('dashboard.student'); 
+    
+    Route::get('/admission', function () {
+        $pageTitle = 'Admission Form'; // Define your page title
+        $breadcrumbs = [
+            ['name' => 'Dashboard', 'url' => route('dashboard.student'), 'icon' => '<i class="material-symbols-rounded text-lg position-relative">Home</i>'],
+            ['name' => 'Admission', 'url' => route('student.admission')],
+        ]; // Define your breadcrumb array
+
+        return view('admission.index', compact('pageTitle', 'breadcrumbs'));
+    })->name('student.admission');
+    
+    Route::get('/classes', function () {
+        return view('classes.index');
+    })->name('student.classes');
+
+    Route::get('/assignments', function () {
+        return view('assignments.index');
+    })->name('student.assignments');
+
+    Route::get('/exams', function () {
+        return view('exams.index');
+    })->name('student.exams');
+
+    Route::get('/profile', function () {
+        return view('profile.index');
+    })->name('student.profile');
+
+    Route::get('/documents', function () {
+        return view('documents.index');
+    })->name('student.documents');
+
+    Route::get('/payments', function () {
+        return view('payments.index');
+    })->name('student.payments');
+
+    Route::get('/reports', function () {
+        return view('reports.index');
+    })->name('student.reports');
+
+    Route::get('/support', function () {
+        return view('support.index');
+    })->name('student.support');
+
+    Route::get('/resources', function () {
+        return view('resources.index');
+    })->name('student.resources');
+
+    
+      
+});
+// ===============================================================================================
+// teacher's route
+Route::group(['prefix' => 'teacher', 'middleware' => ['auth.teacher']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.teacher');
+    })->name('dashboard.teacher'); 
+    
+      
+});
+// ===============================================================================================
+// admin's route
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.admin');
+    })->name('dashboard.admin'); 
+    
+      
+});

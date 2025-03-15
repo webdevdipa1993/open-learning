@@ -13,7 +13,7 @@
             @endif    
             <!-- the display message ends here -->  
 
-            <h3 class="card-title">Welcome, <strong>AS STUDENT</strong> {{ auth()->guard('admin')->user()->name }}</h3>
+            <h3 class="card-title">Welcome, <strong>AS ADMIN</strong> {{ auth()->guard('admin')->user()->name }}</h3>
             <p class="card-text text-muted">{{ auth()->guard('admin')->user()->email }}</p>
             <form action="{{ route('auth.admin.logout') }}" method="POST" class="mt-4">
                 @csrf
