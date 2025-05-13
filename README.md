@@ -15,7 +15,7 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ## 📌 Student Action Plan and Feature Overview
 
 ### 1️⃣ Admission + Enrollment
-### Admission + Enrollment(class/stream/section/course (Grade) Assignment) [refer Point 5]
+##### Admission + Enrollment(class/stream/section/course (Grade) Assignment) [refer Point 5]
 > **URL(s)**: `/student/admission`, `/student/enrollments`
 
 #### 🧾 Form Fields:
@@ -23,7 +23,7 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 * Full Name, Email, Phone, Date of Birth
 * Address, Guardian Name + Contact
 * Class / Grade (dropdown), Stream, Section
-* Course (multi-select), Previous School Name
+* ~~ Course (multi-select), Previous School Name ~~
 * Admission Date
 
 #### 📋 Table Columns:
@@ -43,8 +43,8 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ---
 
 ### 2️⃣ View Subjects
-### See Subjects involved in respective class/stream/section/course (Grade)
-### can see subject wise curriculum(s)/Assignment(s)
+##### See Subjects involved in respective class/stream/section/course (Grade)
+##### can see subject wise curriculum(s)/Assignment(s)
 
 > **URL**: `/student/subjects`
 
@@ -64,8 +64,8 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ---
 
 ### 3️⃣ Curriculum Overview
-### See curriculum of respective class/stream/section/course (Grade)
-### per day classes
+##### See curriculum of respective class/stream/section/course (Grade)
+##### per day classes
 
 > **URL**: `/student/curriculum`
 
@@ -86,8 +86,8 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ---
 
 ### 3.1️⃣ Curriculum Attendance
-### Can Attend curriculum 
-### which will be calculated as attendence]
+##### Can Attend curriculum 
+##### which will be calculated as attendence]
 
 > **URL (POST)**: `/student/attendance/submit`
 
@@ -102,11 +102,11 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ---
 
 ### 3.2️⃣ Assignments
-### can see & submit Assignment(s) in curriculum 
-### single / multiple Assignment(s) could be associated with each curriculum (per day classes)
-### student's may/may n't submit (not mandatory) 
-### Teacher's will verify 
-### Student's can see the Teacher's Corrections
+##### can see & submit Assignment(s) in curriculum 
+##### single / multiple Assignment(s) could be associated with each curriculum (per day classes)
+##### student's may/may n't submit (not mandatory) 
+##### Teacher's will verify 
+##### Student's can see the Teacher's Corrections
 
 > **URL**: `/student/assignments`
 
@@ -131,12 +131,12 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ---
 
 ### 4️⃣ Exams
-### can see & submit exams in respective class/stream/section/course (Grade); 
-### will see dates| see papers on exam start| will able to submit exam on time
-### exam 's start & end date & time will be set by Admin
-### single / multiple exam papers for each exam can/will be prepared by multiple Teachers & Admins 
-### Approval will be done by Admin 
-### there will be single Approved paper will be each exam 
+##### can see & submit exams in respective class/stream/section/course (Grade); 
+##### will see dates| see papers on exam start| will able to submit exam on time
+##### exam 's start & end date & time will be set by Admin
+##### single / multiple exam papers for each exam can/will be prepared by multiple Teachers & Admins 
+##### Approval will be done by Admin 
+##### there will be single Approved paper will be each exam 
 
 > **URL**: `/student/exams`
 > **Exam Start URL**: `/student/exams/{exam_id}/start`
@@ -158,12 +158,12 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ---
 
 ### 5️⃣ Profile, Documents, Payments, and Support
-### Profile + Self Documents + Payment + Support Mail & Chat
-### Simple Student's all details gathering form to keep information [like KYC]
-### Self Documents Section is just see & submit of Pdf/Docs/Images
-### Support Mail & Chat : History & Screenshoot of mail + chat + text 
-### Support Mail & Chat is any form of comunication mostly related to payments
-### Payment for now just have pay button Single click
+##### Profile + Self Documents + Payment + Support Mail & Chat
+##### Simple Student's all details gathering form to keep information [like KYC]
+##### Self Documents Section is just see & submit of Pdf/Docs/Images
+##### Support Mail & Chat : History & Screenshoot of mail + chat + text 
+##### Support Mail & Chat is any form of comunication mostly related to payments
+##### Payment for now just have pay button Single click
 
 #### 🧍‍♂️ Profile
 
@@ -206,8 +206,6 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 > **URL**: `/student/support`
 > **Chat View URL**: `/student/support/{ticket_id}`
 
-* Used mainly for payment-related issues.
-* Support chat includes timestamped message history with attachments.
 
 ##### 🧾 Form Fields:
 
@@ -220,3 +218,8 @@ https://chatgpt.com/canvas/shared/67d59999ade0819198bfa1b2420b77a1
 ##### 🛠 Action:
 
 * View Chat History
+
+#### 📝 Notes:
+
+* Used mainly for payment-related issues.
+* Support chat includes timestamped message history with attachments.
