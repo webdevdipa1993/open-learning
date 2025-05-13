@@ -23,18 +23,6 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link active bg-gradient-dark text-white" href="{{ route('teacher.index') }}">
-        <i class="material-symbols-rounded opacity-5">table_view</i>
-        <span class="nav-link-text ms-1">Teacher</span>
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link active bg-gradient-dark text-white" href="{{ route('student.index') }}">
-        <i class="material-symbols-rounded opacity-5">table_view</i>
-        <span class="nav-link-text ms-1">Student</span>
-    </a>
-</li>
-<li class="nav-item">
     <a class="nav-link active bg-gradient-dark text-white" href="{{ route('curriculum.index') }}">
         <i class="material-symbols-rounded opacity-5">table_view</i>
         <span class="nav-link-text ms-1">Curriculum</span>
@@ -44,5 +32,17 @@
     <a class="nav-link active bg-gradient-dark text-white" href="{{ route('admin.index') }}">
         <i class="material-symbols-rounded opacity-5">table_view</i>
         <span class="nav-link-text ms-1">Admin</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active bg-gradient-dark text-white" href="{{ route('teacher.index') }}">
+        <i class="material-symbols-rounded opacity-5">table_view</i>
+        <span class="nav-link-text ms-1">Teacher</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active bg-gradient-dark text-white" href="{{ route('student.index') }}">
+        <i class="material-symbols-rounded opacity-5">table_view</i>
+        <span class="nav-link-text ms-1">Student</span>
     </a>
 </li>

@@ -60,6 +60,7 @@
                                 required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        <a href="{{route('dashboard')}}" class="btn btn-danger btn-block"><- Go Back</a>
                     </form>
                 </div>
                 <div class="card-footer text-center">
